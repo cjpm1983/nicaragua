@@ -23,4 +23,6 @@ urlpatterns = [
     path("", include("authentication.urls")),  # add this
 
     path('admin/', admin.site.urls),
+    path('reservacion/', include('reservacion.urls')),
+    
 ]

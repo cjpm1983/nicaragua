@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Reservacion
+        </title>
+
+    </head>
+    <body>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <p>
+                    <h3>
+                        {{ form.as_p }}
+                    </h3>
+                </p>
+                <br>
+                <input type="submit" value="Reservar" class="btn ">
+                
+            </div>
+
+
+        </form>
+    </body>
+</html>

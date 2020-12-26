@@ -37,8 +37,10 @@ def login_view(request):
         else:
             msg = 'Error validating the form'    
 
-    send_mail("python","prueba","hostales@localhost.com",["cpalacios@localhost.com"],fail_silently=False)
-    #,auth_user='hostales',auth_password='123'
+    send_mail(subject='ggdfgdf',message='gfgfghgfh',from_email="hostales@localhost.com",recipient_list=['cpalacios@localhost.com'],fail_silently=False)
+    #send_mail("prueba","prueba1","cpalacio@nauta.cu",["cpalacio@nauta.cu"],fail_silently=False,auth_user='cpalacio',auth_password='cpalacio')
+    #send_mail("prueba","prueba1","cpalacio@nauta.cu",["cpalacio@nauta.cu"],fail_silently=False,auth_user='cpalacio@nauta.cu',auth_password='cpalacio')
+    #,auth_user='cpalacio@auta.cu',auth_password='cpalacio'
     return render(request, "accounts/login.html", {"form": form, "msg" : msg})
 
 def register_user(request):

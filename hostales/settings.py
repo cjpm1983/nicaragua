@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'h(q^t$lns72q&_uer7&)l57$9p*gnds##48$x0i#p^(0_psb(7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'usuario',
     'home',
     'authentication',
+    'reservacion',
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -128,4 +130,21 @@ STATIC_ROOT = '/home/cpalacios/Documents/hostales/static/'
 
 AUTH_USER_MODEL = "usuario.UserProfile"
 
-EMAIL_HOST: '192.168.173.1'
+
+#Para iniciar un servidorlocal depruebas
+# python -m smtpd -n -c DebuggingServer localhost:25
+
+# EMAIL_BACKEND: 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND: 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_HOST: '192.168.173.1'
+EMAIL_HOST: '127.0.0.1'
+EMAIL_PORT: 25
+
+# EMAIL_HOST: 'smtp.nauta.cu'
+# EMAIL_PORT: 25
+# EMAIL_USER: 'cpalacio@nauta.cu'
+# EMAIL_USER: 'cpalacios'
+# EMAIL_PASSWORD: '123'
+# EMAIL_USE_TLS: False
+# EMAIL_USE_SSL: False
+#EMAIL_TIMEOUT: 3000
