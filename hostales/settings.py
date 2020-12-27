@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'h(q^t$lns72q&_uer7&)l57$9p*gnds##48$x0i#p^(0_psb(7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'usuario',
+    'home',
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -121,4 +123,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = '/home/cpalacios/Documents/hostales/static/'
+
+
 AUTH_USER_MODEL = "usuario.UserProfile"
+
+EMAIL_HOST: '192.168.173.1'
