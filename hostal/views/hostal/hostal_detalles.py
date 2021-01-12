@@ -14,10 +14,10 @@ def HostalDetallesView(request, hostal_id):
 
         hostal = str(reg['hostal'].value())
 
-        asuntoCliente = "Solicitud recibida en Hostales-Cuba"
+        asuntoCliente = "Solicitud recibida en Hostales-Nicaragua"
         mensajeCliente = "Pronto nos pondremos en contacto con usted. recibimos su solicitud para %s" % (hostal)
         para = str(reg['Email'].value())
-        send_mail(asuntoCliente,mensajeCliente,'hostales@cd.com',[para])
+        send_mail(asuntoCliente,mensajeCliente,'reservaenrealnicaragua@gmail.com',[para])
 
         return render(request,'hostal/detalles.html',{'para':para,'object':hosta})
 

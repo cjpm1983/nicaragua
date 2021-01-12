@@ -142,14 +142,14 @@ AUTH_USER_MODEL = "usuario.UserProfile"
 # EMAIL_BACKEND: 'django.core.mail.backends.smtp.EmailBackend'
 #EMAIL_BACKEND: 'django.core.mail.backends.console.EmailBackend'
 #EMAIL_HOST: '192.168.173.1'
-EMAIL_HOST: '127.0.0.1'
-EMAIL_PORT: 25
+#EMAIL_HOST: '127.0.0.1'
+#EMAIL_PORT: 25
 
-# EMAIL_HOST: 'smtp.nauta.cu'
-# EMAIL_PORT: 25
-# EMAIL_USER: 'cpalacio@nauta.cu'
+EMAIL_HOST: 'smtp.gmail.com'
+EMAIL_PORT: 587
+EMAIL_USER: 'reservaenrealnicaragua@gmail.com'
 # EMAIL_USER: 'cpalacios'
 # EMAIL_PASSWORD: '123'
-# EMAIL_USE_TLS: False
-# EMAIL_USE_SSL: False
+EMAIL_USE_TLS: True
+EMAIL_USE_SSL: True
 #EMAIL_TIMEOUT: 3000
