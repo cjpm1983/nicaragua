@@ -1,0 +1,81 @@
+{% extends "hostal/layouts/base.html" %}
+{% load static %}
+{% block title %} Hostales de Ejemplo {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<section class="features11 cid-skdFU9PfZV" id="features11-f">
+    <div class="container">   
+        <div class="col-md-12">
+            <div class="media-container-row">
+                <div class="mbr-figure" style="width: 50%;">
+                    <img src="../../../media/{{object.imagendestacada}}" alt="" title="">
+                </div>
+                <div class=" align-left aside-content">
+                    <h2 class="mbr-title pt-2 mbr-fonts-style display-2">
+                        {{object.nombre}}
+                    </h2>
+                    <div class="mbr-section-text">
+                        <p class="mbr-text mb-5 pt-3 mbr-light mbr-fonts-style display-5">
+                          {{object.descripcion}}
+                        </p>
+                    </div>
+
+                    <div class="block-content">
+                        <div class="card p-3 pr-3">
+                            <div class="media">
+                                <div class=" align-self-center card-img pb-3">
+                                    <span class="mbri-extension mbr-iconfont"></span>
+                                </div>     
+                                <div class="media-body">
+                                    <h4 class="card-title mbr-fonts-style display-7">
+                                        {{object.descripcion}}
+                                    </h4>
+                                </div>
+                            </div>                
+
+                            <div class="card-box">
+                                <p class="block-text mbr-fonts-style display-7">
+                                   {{object.direccion}}
+                                </p>
+                            </div>
+                        </div>
+
+                            <div class="card-box">
+                                <p class="block-text mbr-fonts-style display-7">
+         
+        {% if para %}
+                                   se ha enviadoun correo a {{para}} con informacion de la reservacion
+        {% else %}                            
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.Email.label }}
+                {{ form.Email }}
+                    
+                
+                <br>
+                <input type="hidden" name="hostal" value="{{object.nombre}}">
+                <input type="submit" value="Reservar" class="btn btn-success">
+                
+            </div>
+        </form>
+        {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>          
+</section>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+

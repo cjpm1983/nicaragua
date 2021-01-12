@@ -1,0 +1,45 @@
+{% extends "hostal/layouts/base.html" %}
+{% load static %}
+{% block title %} Hostales Reserva {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<section class="mbr-gallery mbr-slider-carousel cid-skdESfrJ3N" id="gallery1-3">
+
+    
+
+    <div class="container">
+        <div><!-- Filter --><!-- Gallery -->
+            <div class="mbr-gallery-row">
+                <div class="mbr-gallery-layout-default">
+                    <div>
+                        <div>
+                            {% for Hostal in object_list %}
+                            <div class="mbr-gallery-item mbr-gallery-item--p1" data-video-url="false" data-tags="Awesome">
+                                <div href="#lb-gallery1-3" data-slide-to="0" data-toggle="modal">
+                                    <img src="../media/{{Hostal.imagendestacada}}" alt="" title="">
+                                    <span class="icon-focus"></span><span class="mbr-gallery-title mbr-fonts-style display-7">
+                                        <b>{{Hostal}}</b>
+                                    </span>
+                                </div>
+                            
+                                <p><a class="btn btn-primary" href="{% url "hostal_detalles" Hostal.id %}">Reservar</a></p>
+                            </div>
+                            {% endfor %}
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+</section>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+

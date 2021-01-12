@@ -1,0 +1,5 @@
+from .hostal_delete_test import HostalDeleteTestCase
+from .hostal_update_test import HostalUpdateTestCase
+from .hostal_detail_test import HostalDetailTestCase
+from .hostal_create_test import HostalCreateTestCase
+from .hostal_list_test import HostalListTestCase
