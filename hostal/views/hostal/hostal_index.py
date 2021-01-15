@@ -27,7 +27,7 @@ def HostalIndexView(request):
         para = str(reg['Email'].value())
         send_mail(asuntoCliente,mensajeCliente,'reservaenrealnicaragua@gmail.com',[para,],fail_silently=False,)
 
-        return render(request,'hostal/index.html',{'para':para})
+        return render(request,'hostal/index.html',{'form':reg,'para':para})
 
     return render(request,'hostal/index.html',{'form':reg})
     

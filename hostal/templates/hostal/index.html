@@ -12,18 +12,28 @@
   <title>
     {% block title %}{% endblock %} 
   </title>
-  <link rel="stylesheet" href="{% static 'assets/web/assets/mobirise-icons/mobirise-icons.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/tether/tether.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap-grid.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap-reboot.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/dropdown/css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/socicon/css/styles.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/datatables/data-tables.bootstrap4.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/theme/css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/gallery/style.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/mobirise/css/mbr-additional.css' %}" type="text/css">
-  {% block stylesheets %}{% endblock stylesheets %}
+
+  <!-- XDSoft DateTimePicker -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{% static 'assets/web/assets/mobirise-icons/mobirise-icons.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/tether/tether.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap-grid.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap-reboot.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/dropdown/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/socicon/css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/datatables/data-tables.bootstrap4.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/theme/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/gallery/style.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/mobirise/css/mbr-additional.css' %}" type="text/css">
+        
+        
+  {% endblock stylesheets %}
   
   
 </head>
@@ -256,23 +266,33 @@
     </div>
 </section>
 
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
 
-  <script src="{% static 'assets/web/assets/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'assets/popper/popper.min.js' %}"></script>
-  <script src="{% static 'assets/tether/tether.min.js' %}"></script>
-  <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'assets/smoothscroll/smooth-scroll.js' %}"></script>
-  <script src="{% static 'assets/dropdown/js/script.min.js' %}"></script>
-  <script src="{% static 'assets/touchswipe/jquery.touch-swipe.min.js' %}"></script>
-  <script src="{% static 'assets/parallax/jarallax.min.js' %}"></script>
-  <script src="{% static 'assets/mbr-popup-btns/mbr-popup-btns.js' %}"></script>
-  <script src="{% static 'assets/masonry/masonry.pkgd.min.js' %}"></script>
-  <script src="{% static 'assets/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
-  <script src="{% static 'assets/mbr-switch-arrow/mbr-switch-arrow.js' %}"></script>
-  <script src="{% static 'assets/theme/js/script.js' %}"></script>
-  <script src="{% static 'assets/gallery/script.js' %}"></script>
-  
-  
+        <script src="{% static 'assets/web/assets/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/popper/popper.min.js' %}"></script>
+        <script src="{% static 'assets/tether/tether.min.js' %}"></script>
+        <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'assets/smoothscroll/smooth-scroll.js' %}"></script>
+        <script src="{% static 'assets/dropdown/js/script.min.js' %}"></script>
+        <script src="{% static 'assets/touchswipe/jquery.touch-swipe.min.js' %}"></script>
+        <script src="{% static 'assets/parallax/jarallax.min.js' %}"></script>
+        <script src="{% static 'assets/mbr-popup-btns/mbr-popup-btns.js' %}"></script>
+        <script src="{% static 'assets/masonry/masonry.pkgd.min.js' %}"></script>
+        <script src="{% static 'assets/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+        <script src="{% static 'assets/mbr-switch-arrow/mbr-switch-arrow.js' %}"></script>
+        <script src="{% static 'assets/theme/js/script.js' %}"></script>
+        <script src="{% static 'assets/gallery/script.js' %}"></script>
+        
+
+        <script>
+            $(function () {
+                $("#id_HoraEntrada").datetimepicker({
+                format: 'd/m/Y H:i',
+                });
+            });
+        </script>
+
+{% endblock javascripts %}
+
 </body>
 </html>
