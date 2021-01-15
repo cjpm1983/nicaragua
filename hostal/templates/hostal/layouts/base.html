@@ -87,6 +87,85 @@
     <div class="container align-center">
         <div class="row justify-content-md-center">
             <div class="mbr-white col-md-10">
+
+
+
+
+
+
+
+<section class="features11 cid-skdFU9PfZV" id="features11-f">
+    <div class="container">   
+        <div class="col-md-12">
+            <div class="media-container-row">
+                <div class="mbr-figure" style="width: 50%;">
+                    <img src="../../../media/{{object.imagendestacada}}" alt="" title="">
+                </div>
+                <div class=" align-left aside-content">
+                    <h2 class="mbr-title pt-2 mbr-fonts-style display-2">
+                        {{object.nombre}}
+                    </h2>
+                    <div class="mbr-section-text">
+                        <p class="mbr-text mb-5 pt-3 mbr-light mbr-fonts-style display-5">
+                          {{object.descripcion}}
+                        </p>
+                    </div>
+
+                    <div class="block-content">
+                        <div class="card p-3 pr-3">
+                            <div class="media">
+                                <div class=" align-self-center card-img pb-3">
+                                    <span class="mbri-extension mbr-iconfont"></span>
+                                </div>     
+                                <div class="media-body">
+                                    <h4 class="card-title mbr-fonts-style display-7">
+                                        {{object.descripcion}}
+                                    </h4>
+                                </div>
+                            </div>                
+
+                            <div class="card-box">
+                                <p class="block-text mbr-fonts-style display-7">
+                                   {{object.direccion}}
+                                </p>
+                            </div>
+                        </div>
+
+                            <div class="card-box">
+                                <p class="block-text mbr-fonts-style display-7">
+         
+        {% if para %}
+                                   se ha enviadoun correo a {{para}} con informacion de la reservacion
+        {% else %}                            
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.Email.label }}
+                {{ form.Email }}
+                    
+                
+                <br>
+                <input type="hidden" name="hostal" value="{{object.nombre}}">
+                <input type="submit" value="Reservar" class="btn btn-success">
+                
+            </div>
+        </form>
+        {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>          
+</section>
+
+
+
+
+
+
                 <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1">
                     RESERVACION-ES-CUBA
                 </h1>
@@ -108,42 +187,6 @@
     </div>
 </section>
 
-<!--section class="carousel slide cid-skdEWB3rtt" data-interval="false" id="slider2-4">
-
-    
-    <div class="container content-slider">
-        <div class="content-slider-wrap">
-            <div><div class="mbr-slider slide carousel" data-pause="true" data-keyboard="false" data-ride="carousel" data-interval="4000"><ol class="carousel-indicators"><li data-app-prevent-settings="" data-target="#slider2-4" class=" active" data-slide-to="0"></li><li data-app-prevent-settings="" data-target="#slider2-4" data-slide-to="1"></li><li data-app-prevent-settings="" data-target="#slider2-4" data-slide-to="2"></li></ol><div class="carousel-inner" role="listbox"><div class="carousel-item slider-fullscreen-image active" data-bg-video-slide="false" style="background-image: url( {% static ' assets/images/1.jpg' %} );"><div class="container container-slide"><div class="image_wrapper"><div class="mbr-overlay"></div><img src="{% static 'assets/images/1.jpg' %}"><div class="carousel-caption justify-content-center"><div class="col-10 align-center"><h2 class="mbr-fonts-style display-2">FULL SCREEN SLIDER</h2><p class="lead mbr-text mbr-fonts-style display-7">Choose from the large selection of latest pre-made blocks - jumbotrons, hero images, parallax scrolling, video backgrounds, hamburger menu, sticky header and more.</p><div class="mbr-section-btn" buttons="0"><a class="btn btn-success display-4" href="https://mobirise.com">FOR WINDOWS</a> <a class="btn  btn-white-outline display-4" href="https://mobirise.com">FOR MAC</a></div></div></div></div></div></div><div class="carousel-item slider-fullscreen-image" data-bg-video-slide="https://www.youtube.com/watch?v=fwkKc6M60-0"><div class="mbr-overlay"></div><div class="container container-slide"><div class="image_wrapper"><img src="{% static 'assets/images/2.jpg'%}" style="opacity: 0;"><div class="carousel-caption justify-content-center"><div class="col-10 align-center"><p class="lead mbr-text mbr-fonts-style display-7">Slide with youtube video background and color overlay. Title and text are aligned to the left.</p></div></div></div></div></div><div class="carousel-item slider-fullscreen-image" data-bg-video-slide="false" style="background-image: url({% static 'assets/images/3.jpg'%});"><div class="container container-slide"><div class="image_wrapper"><div class="mbr-overlay"></div><img src="{% static 'assets/images/3.jpg'%}"><div class="carousel-caption justify-content-center"><div class="col-10 align-center"><p class="lead mbr-text mbr-fonts-style display-7">Choose from the large selection of latest pre-made blocks - jumbotrons, hero images, parallax scrolling, video backgrounds, hamburger menu, sticky header and more.</p></div></div></div></div></div></div><a data-app-prevent-settings="" class="carousel-control carousel-control-prev" role="button" data-slide="prev" href="#slider2-4"><span aria-hidden="true" class="mbri-left mbr-iconfont"></span><span class="sr-only">Previous</span></a><a data-app-prevent-settings="" class="carousel-control carousel-control-next" role="button" data-slide="next" href="#slider2-4"><span aria-hidden="true" class="mbri-right mbr-iconfont"></span><span class="sr-only">Next</span></a></div></div> 
-        </div>
-    </div>
-</section-->
-
-<!--section class="mbr-section info3 cid-skdGXXdneG" id="info3-t">
-
-    
-
-    
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="media-container-column title col-12 col-md-10">
-                <h2 class="align-left mbr-bold mbr-white pb-3 mbr-fonts-style display-2">
-                    BACKGROUND IMAGE
-                </h2>
-                <h3 class="mbr-section-subtitle align-left mbr-light mbr-white pb-3 mbr-fonts-style display-5">
-                    Shape your future web project with sharp design and refine coded functions
-                </h3>
-                <p class="mbr-text align-left mbr-white mbr-fonts-style display-7">
-                    Background image with solid color overlay and parallax effect. Develop fully responsive, mobile-ready websites that look amazing on any devices and browsers
-                </p>
-                <div class="mbr-section-btn align-left py-4">
-                    <a class="btn btn-primary display-4" href="https://mobirise.com">LEARN MORE</a>
-                    <a class="btn btn-white-outline display-4" href="https://mobirise.com">LIVE DEMO</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section-->
 
 {% block content %}{% endblock content %}
 

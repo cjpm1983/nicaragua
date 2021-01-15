@@ -139,24 +139,13 @@ AUTH_USER_MODEL = "usuario.UserProfile"
 #Para iniciar un servidorlocal depruebas
 # python -m smtpd -n -c DebuggingServer localhost:25
 
-EMAIL_BACKEND: 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_BACKEND: 'django.core.mail.backends.filebased.EmailBackend'
-#EMAIL_BACKEND: 'django.core.mail.backends.console.EmailBackend'
-#EMAIL_HOST: '192.168.173.1'
-#EMAIL_HOST: '127.0.0.1'
-#EMAIL_PORT: 25
+EMAIL_BACKEND= 'django.core.mail.backends.smtp.EmailBackend'
 
-'''
-EMAIL_HOST: 'smtp.gmail.com'
-EMAIL_PORT: 587
-EMAIL_HOST_USER: 'reservaenrealnicaragua'
-EMAIL_HOST_PASSWORD = 'sywcleagezqrsywj'
-EMAIL_USE_TLS: True
-'''
-DEFAULT_FROM_EMAIL = 'admin@localhost.com'
 
-# EMAIL_USER: 'cpalacios'
-#EMAIL_PASSWORD: '123'
-
-#EMAIL_USE_SSL: False
-#EMAIL_TIMEOUT: 3000
+EMAIL_HOST= 'smtp.gmail.com'
+EMAIL_PORT= 587
+EMAIL_HOST_USER= 'reservaenrealnicaragua@gmail.com'
+EMAIL_HOST_PASSWORD = 'hjfnpjduggqtpoww'
+EMAIL_USE_TLS= True
+DEFAULT_FROM_EMAIL= 'admin@tomatattoocuba.com'
+EMAIL_TIMEOUT= 3000

@@ -6,7 +6,7 @@ from django.urls import path
 
 
 urlpatterns = [
-    path('',HostalIndexView.as_view(), name = 'hostal_index'),
+    path('',HostalIndexView, name = 'hostal_index'),
     path('detalles/<int:hostal_id>/',HostalDetallesView, name = 'hostal_detalles'),
 
   ]
