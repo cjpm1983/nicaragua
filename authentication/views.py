@@ -16,6 +16,9 @@ from django.http import HttpResponse
 from .forms import LoginForm, SignUpForm
 from django.core.mail import send_mail
 
+from django.contrib.auth import logout as auth_logout
+
+
 def login_view(request):
     form = LoginForm(request.POST or None)
 
@@ -30,18 +33,16 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 msg = "registrado"
-                return redirect("/")
+                #return render(request, "reservacion/index.html", {"user": user})
+                return redirect("/reservar")
 
             else:    
-                msg = 'Invalid credentials'    
+                msg = 'Credenciales Incorrectas'    
         else:
-            msg = 'Error validating the form'    
+            msg = 'Error de validacion'    
 
-    send_mail(subject='ggdfgdf',message='gfgfghgfh',from_email="hostales@localhost.com",recipient_list=['cpalacios@localhost.com'],fail_silently=False)
-    #send_mail("prueba","prueba1","cpalacio@nauta.cu",["cpalacio@nauta.cu"],fail_silently=False,auth_user='cpalacio',auth_password='cpalacio')
-    #send_mail("prueba","prueba1","cpalacio@nauta.cu",["cpalacio@nauta.cu"],fail_silently=False,auth_user='cpalacio@nauta.cu',auth_password='cpalacio')
-    #,auth_user='cpalacio@auta.cu',auth_password='cpalacio'
-    return render(request, "accounts/login.html", {"form": form, "msg" : msg})
+
+    return render(request, "authentication/login.html", {"form": form, "msg" : msg})
 
 def register_user(request):
 
@@ -66,4 +67,9 @@ def register_user(request):
     else:
         form = SignUpForm()
 
-    return render(request, "accounts/register.html", {"form": form, "msg" : msg, "success" : success })
+    return render(request, "authentication/register.html", {"form": form, "msg" : msg, "success" : success })
+
+def logout(request):
+    auth_logout(request)
+    return redirect("/")
+

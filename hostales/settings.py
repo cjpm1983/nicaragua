@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'usuario',
-    'home',
+    #'home',
     'authentication',
-    'reservacion',
+    #'reservacion',
     'sslserver',
     'hostal',
 ]
@@ -58,11 +58,17 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'hostales.urls'
-
+""" 
+para personalizar el admin , renombrar elarchivo base.html en hostal/templates/admin
+y DIRS aqui debajoen TEMPLATES
+TEMPLATE_DIR1 = os.path.join(BASE_DIR, "authentication/templates")  # ROOT dir for templates
+TEMPLATE_DIR2 = os.path.join(BASE_DIR, "hostal/templates")  # ROOT dir for templates
+ """
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
+        #'DIRS': [TEMPLATE_DIR1,TEMPLATE_DIR2],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-mx'
 
 TIME_ZONE = 'UTC'
 
@@ -139,8 +145,9 @@ AUTH_USER_MODEL = "usuario.UserProfile"
 #Para iniciar un servidorlocal depruebas
 # python -m smtpd -n -c DebuggingServer localhost:25
 
-EMAIL_BACKEND= 'django.core.mail.backends.smtp.EmailBackend'
 
+
+EMAIL_BACKEND= 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST= 'smtp.gmail.com'
 EMAIL_PORT= 587
@@ -149,3 +156,7 @@ EMAIL_HOST_PASSWORD = 'hjfnpjduggqtpoww'
 EMAIL_USE_TLS= True
 DEFAULT_FROM_EMAIL= 'admin@tomatattoocuba.com'
 EMAIL_TIMEOUT= 3000
+
+
+#EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+#EMAIL_FILE_PATH = 'temp/app-messages/'

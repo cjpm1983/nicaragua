@@ -1,0 +1,72 @@
+{% extends 'hostal/base.html' %}
+
+{% block title %} Acceso {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  
+    <div class="container align-center">
+        <div class="row justify-content-md-center">
+        
+                <div class="media-container-column" data-form-type="formoid" style="background-color: rgba(255, 255, 255, 0.7);
+                                                                                            padding: 40px 80px;
+                                                                                            border-radius: 10px;
+                                                                                            color: #403837;">        
+                {% if msg %}
+                  <p>{{ msg }}</p>
+                {% else %}
+                  <p>
+                    Use sus credenciales
+                    <br />
+                    o <a href={% url 'register' %} >Regístrese con nosotros</a>
+                  </p>
+                {% endif %}  
+
+
+              <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                    </div>
+                    {{ form.username }}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    {{ form.password }}
+                  </div>
+                </div>
+                <div class="custom-control custom-control-alternative custom-checkbox" >
+                 <a href={% url 'admin_password_reset' %} >¿Ha olvidado su contraseña?</a>
+                  <!--input class="custom-control-input" id=" customCheckLogin" type="checkbox">
+                  <label class="custom-control-label" for=" customCheckLogin">
+                    <span class="text-muted">Remember me</span>
+                  </label-->
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary my-4">Acceder</button>
+                </div>
+              </form>
+
+            
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

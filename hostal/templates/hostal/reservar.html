@@ -1,0 +1,108 @@
+{% extends "hostal/base.html" %}
+{% load static %}
+{% block title %} Hostales Reserva {% endblock %} 
+
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href={% static "assets/dtpicker/jquery.datetimepicker.min.css" %} integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+{% endblock stylesheets %}
+
+{% block content %}
+  
+    <div class="container align-center">
+        <div class="row justify-content-md-center">
+            <div class="mbr-white col-md-10" style="display: flex;
+    justify-content: center;">
+
+
+
+                <div class="media-container-column col-lg-8" data-form-type="formoid" style="background-color: rgba(255, 255, 255, 0.7);
+                                                                                            padding: 40px 0px;
+                                                                                            border-radius: 10px;
+                                                                                            color: #403837;">
+                    {% if para %}
+                        se ha enviadoun correo a {{para}} con informacion de la reservacion
+                    {% else %}  
+                        
+                            {% if form.subject.errors %}
+                                <ol>
+                                {% for error in form.subject.errors %}
+                                    <li><strong>{{ error|escape }}</strong></li>
+                                {% endfor %}
+                                </ol>
+                            {% endif %}
+                            <form method="post">
+                                {% csrf_token %}
+                            <div style="text-align:right;width:80%">
+
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" >{{ form.Nombre.label}}&nbsp;</label>
+                                            {{ form.Nombre}}
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" >{{ form.Email.label}}&nbsp;</label>
+                                            {{ form.Email}}
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" >{{ form.HoraEntrada.label}}&nbsp;</label>
+                                            {{ form.HoraEntrada}}
+                                    
+                                </div>     
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" >{{ form.HoraSalida.label}}&nbsp;</label>
+                                            {{ form.HoraSalida}}
+                                    
+                                </div>                    
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" >{{ form.Aerolinea.label}}&nbsp;</label>
+                                            {{ form.Aerolinea}}
+                                    
+                                </div> 
+
+                                </div>
+
+                                <span class="input-group-btn">
+                                    <button href="" type="submit" class="btn btn-primary btn-form display-4">Reservar</button>
+                                </span>
+                                
+                            </form>
+
+
+
+
+                {% endif %}
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+
+{% block javascripts %}
+        <script src={% static "https://code.jquery.com/jquery-3.3.1.slim.min.js" %} integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src={% static "assets/dtpicker/jquery.datetimepicker.full.min.js" %} integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+        
+        <script>
+            $(function () {
+                //e.preventDefault();
+                $("#id_HoraEntrada").attr("autocomplete", "off"); 
+                $("#id_HoraEntrada").datetimepicker({
+                format: 'd/m/Y H:i',
+                });
+
+                $("#id_HoraSalida").attr("autocomplete", "off"); 
+                $("#id_HoraSalida").datetimepicker({
+                format: 'd/m/Y H:i',
+                });
+
+            });
+            
+        </script>
+
+{% endblock javascripts %}

@@ -4,17 +4,17 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 from .managers import UserProfileManager
 
+from django.contrib.auth.models import AbstractUser
+
 
 # Create your models here.
 
 from django.contrib.auth.models import AbstractUser
 
 class UserProfile(AbstractUser):
-    first_name = models.TextField()
-    last_name = models.TextField()
-
+    pasaporte = models.CharField(max_length=7,null=True) 
 
     def __str__(self):
         return self.username
 
-# Create your models here.
+

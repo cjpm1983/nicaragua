@@ -6,8 +6,9 @@ from django.urls import path
 
 
 urlpatterns = [
-    path('',HostalIndexView, name = 'hostal_index'),
-    path('detalles/<int:hostal_id>/',HostalDetallesView, name = 'hostal_detalles'),
+    path('reservar/',HostalIndexView, name = 'hostal_reservar'),
+    #path('detalles/<int:hostal_id>/',HostalDetallesView, name = 'hostal_detalles'),
+
 
   ]
  
