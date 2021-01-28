@@ -1,0 +1,62 @@
+{% extends "hostal/base.html" %}
+{% load static %}
+{% block title %} Reservaciones {% endblock %} 
+
+
+
+{% block stylesheets %}
+   
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container align-center">
+        <div class="justify-content-md-center">
+        <h2 style=" color: #f9b530;
+                    text-shadow: 0 3 black;
+                    text-shadow: 0 0 black;
+                    box-shadow: brown;
+                    background-color: #2d3034;
+                    padding: 5px 20px;
+                    border-radius: 10px;
+                    }">
+        Sus reservaciones</h2>
+            <div style="max-width: 100%;
+    overflow: scroll;">
+
+<table class="table table-striped table-dark">
+    <thead>
+        <th style="min-width: 100px;">Fecha de llegada</th>
+        <th style="min-width: 100px;">Fecha de partida</th>
+        <th>a nombre de</th>
+        <th>pasaporte</th>
+        <th>No personas</th>
+        <th>Detalles</th>
+        
+    </thead>
+    <tbody>
+    {% for r in reservaciones %}
+        <tr>
+            <td>{{r.HoraEntrada}}</td>
+            <td>{{r.HoraSalida}}</td>
+            <td>{{r.Nombre}}</td>
+            <td>{{r.Pasaporte}}</td>
+            <td>{{r.Personas}}</td>
+            <td><a target="_blank" href="{% get_media_prefix %}hostal/static/pdfs/{{r.pdf}}">Descargar(PDF)</a></td>
+
+        </tr>
+    {% endfor %} 
+
+    </tbody>
+
+</table>
+
+</div></div></div>
+
+{% endblock content %}
+
+
+
+{% block javascripts %}
+
+{% endblock javascripts %}

@@ -1,2 +1,2 @@
 from .hostal import HostalIndexView
-from .hostal import HostalDetallesView
+from .hostal import ReservacionesView

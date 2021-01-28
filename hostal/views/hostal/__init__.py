@@ -1,3 +1,3 @@
 from .hostal_index import HostalIndexView
-from .hostal_detalles import HostalDetallesView
+from .hostal_reservaciones import ReservacionesView
 

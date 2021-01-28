@@ -1,5 +1,5 @@
 from hostal.views import HostalIndexView
-from hostal.views import HostalDetallesView
+from hostal.views import ReservacionesView
 
 
 from django.urls import path
@@ -7,7 +7,7 @@ from django.urls import path
 
 urlpatterns = [
     path('reservar/',HostalIndexView, name = 'hostal_reservar'),
-    #path('detalles/<int:hostal_id>/',HostalDetallesView, name = 'hostal_detalles'),
+    path('reservaciones/',ReservacionesView, name = 'reservaciones_detalles'),
 
 
   ]

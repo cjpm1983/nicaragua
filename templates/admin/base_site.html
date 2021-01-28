@@ -1,0 +1,9 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Hotel Real{{ title }} | {{ site_title|default:_('Hotel Real') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Hotel Real</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

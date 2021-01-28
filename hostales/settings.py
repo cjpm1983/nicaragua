@@ -64,10 +64,11 @@ y DIRS aqui debajoen TEMPLATES
 TEMPLATE_DIR1 = os.path.join(BASE_DIR, "authentication/templates")  # ROOT dir for templates
 TEMPLATE_DIR2 = os.path.join(BASE_DIR, "hostal/templates")  # ROOT dir for templates
  """
+TEMPLATE_DIR3 = os.path.join(BASE_DIR, "templates")
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR3],
         #'DIRS': [TEMPLATE_DIR1,TEMPLATE_DIR2],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -146,7 +147,7 @@ AUTH_USER_MODEL = "usuario.UserProfile"
 # python -m smtpd -n -c DebuggingServer localhost:25
 
 
-
+""" 
 EMAIL_BACKEND= 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST= 'smtp.gmail.com'
@@ -156,7 +157,7 @@ EMAIL_HOST_PASSWORD = 'hjfnpjduggqtpoww'
 EMAIL_USE_TLS= True
 DEFAULT_FROM_EMAIL= 'admin@tomatattoocuba.com'
 EMAIL_TIMEOUT= 3000
+ """
 
-
-#EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-#EMAIL_FILE_PATH = 'temp/app-messages/'
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = 'temp/app-messages/'

@@ -21,13 +21,13 @@ class UserProfileAdmin(UserAdmin):
     add_form = UserProfileCreationForm
     form = UserProfileChangeForm
     model = UserProfile
-    list_display = ('username', 'is_staff', 'is_active')
-    list_filter = ('username', 'is_staff', 'is_active')
+    list_display = ('username','first_name', 'last_name','is_staff', 'is_active')
+    list_filter = ('is_active',)
 
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        ('Personal_Data', {'fields': ('email', 'first_name', 'last_name')}),
-        ('Permissions', {'fields': ('groups', 'is_staff', 'is_active', 'is_superuser')}),
+        ("Autenticacion", {'fields': ('username', 'password')}),
+        ('Informacion Personal', {'fields': ('first_name', 'last_name','email','Telefono')}),
+        ('Permisos', {'fields': ('groups', 'is_staff', 'is_active', 'is_superuser')}),
         #('Images', {'fields': ('avatar', 'background')}),
         # ('Dates', {'fields': ('last_login', 'date_joined')}),
 
@@ -39,7 +39,7 @@ class UserProfileAdmin(UserAdmin):
     #         'fields':('username','password1','password2','is_staff','is_active')
     #     })
     # )
-    search_fields = ('username',)
+    search_fields = ('username','first_name','last_name','email')
     ordering = ('username',)
 
 admin.site.register(UserProfile,UserProfileAdmin)

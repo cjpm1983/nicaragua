@@ -42,8 +42,23 @@
                                     
                                 </div>
                                 <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" >No. Pasaporte&nbsp;</label>
+                                            {{ form.Pasaporte}}
+                                    
+                                </div>
+                                <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" >{{ form.Email.label}}&nbsp;</label>
                                             {{ form.Email}}
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" >{{ form.Personas.label}}&nbsp;</label>
+                                            {{ form.Personas}}
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" >Costo de Resrevacion</label>
+                                            <b id="costo">El costo es de 550 USD</b>
                                     
                                 </div>
                                 <div class="form-group">
@@ -93,15 +108,32 @@
                 //e.preventDefault();
                 $("#id_HoraEntrada").attr("autocomplete", "off"); 
                 $("#id_HoraEntrada").datetimepicker({
-                format: 'd/m/Y H:i',
+                format: 'Y-m-d H:i',
+                //months:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
                 });
 
                 $("#id_HoraSalida").attr("autocomplete", "off"); 
                 $("#id_HoraSalida").datetimepicker({
-                format: 'd/m/Y H:i',
+                //format: 'd/m/Y H:i',
+                format: 'Y-m-d H:i',
                 });
 
             });
+
+            $('#id_Personas').on('change',function(){
+                switch (this.value) {
+                    case '1':{
+                        $('#costo').html("El costo es de 550 USD")
+                    }
+                    break
+                    case '2':{
+                        $('#costo').html("El costo es de 1000 USD")
+                    }
+                    break
+                }
+                
+                
+                })
             
         </script>
 

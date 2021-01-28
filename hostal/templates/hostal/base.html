@@ -82,7 +82,21 @@
                             {{ user.get_username }}
                         </a>
                     </li>
-                    
+
+                    <li class="nav-item">
+                        <a class="nav-link link text-white display-4" href="{% url 'hostal_reservar' %}">
+                            <span class="mbri-lock mbr-iconfont mbr-iconfont-btn"></span>
+                            Reservar
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link link text-white display-4" href="{% url 'reservaciones_detalles' %}">
+                            <span class="mbri-lock mbr-iconfont mbr-iconfont-btn"></span>
+                            Listado
+                        </a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link link text-white display-4" href="{% url 'logout' %}">
                             <span class="mbri-lock mbr-iconfont mbr-iconfont-btn"></span>
@@ -101,11 +115,11 @@
             </ul>
 
             {% if user.is_authenticated == False %}
-                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary display-4" href="/register">
+                <!--div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary display-4" href="/register">
                         <span class="mbri-touch mbr-iconfont mbr-iconfont-btn "></span>
                         Registro
                     </a>
-                </div>
+                </div-->
             {% endif %}
 
         </div>
