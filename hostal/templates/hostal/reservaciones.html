@@ -31,6 +31,10 @@
         <th>a nombre de</th>
         <th>pasaporte</th>
         <th>No personas</th>
+        
+        <th>Foto Pasaporte</th>
+        <th>Foto Pasaje</th>
+        
         <th>Detalles</th>
         
     </thead>
@@ -42,6 +46,18 @@
             <td>{{r.Nombre}}</td>
             <td>{{r.Pasaporte}}</td>
             <td>{{r.Personas}}</td>
+            <td>
+                {% if r.Imagen_Pasaporte %}
+                    <a target="_blank" href="{% get_media_prefix %}{{r.Imagen_Pasaporte}}">Descargar(Imagen)</a>
+                {% endif %}
+            </td>
+
+            <td>
+                {% if r.Imagen_Pasaje %}
+                    <a target="_blank" href="{% get_media_prefix %}{{r.Imagen_Pasaje}}">Descargar(Imagen)</a>
+                {% endif %}
+                
+            </td>
             <td><a target="_blank" href="{% get_media_prefix %}hostal/static/pdfs/{{r.pdf}}">Descargar(PDF)</a></td>
 
         </tr>

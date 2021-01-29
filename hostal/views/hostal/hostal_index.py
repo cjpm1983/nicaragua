@@ -22,60 +22,63 @@ def HostalIndexView(request):
 
     #hosta = Hostal.objects.get(pk=hostal_id)
     if request.method == 'POST':
-        reg = forms.Reservacion(request.POST)
-
+        
+        reg = forms.Reservacion(request.POST or None, request.FILES or None)
+        if reg.is_valid():
         #hostal = str(reg['hostal'].value())
 
-        asuntoCliente = "Solicitud recibida en Hostales-Nicaragua"
-        mensajeCliente = "Pronto nos pondremos en contacto con usted. recibimos su solicitud para %s" % ("RealNicaragua")
-        para = str(reg['Email'].value())
-        
-        #send_mail(asuntoCliente,mensajeCliente,'reservaenrealnicaragua@gmail.com',[para,],fail_silently=False,)
+            asuntoCliente = "Solicitud recibida en Hostales-Nicaragua"
+            mensajeCliente = "Pronto nos pondremos en contacto con usted. recibimos su solicitud para %s" % ("RealNicaragua")
+            para = str(reg['Email'].value())
+            
+            #send_mail(asuntoCliente,mensajeCliente,'reservaenrealnicaragua@gmail.com',[para,],fail_silently=False,)
 
-        #Nombre para el PDF
-        archivo = "%s_%s"% (str(reg['Pasaporte'].value()),datetime.datetime.now())
+            #Nombre para el PDF
+            archivo = "%s_%s"% (str(reg['Pasaporte'].value()),datetime.datetime.now())
 
-        airline = Aerolinea.objects.filter(Nombre=str(reg['Aerolinea'].value()))
-        #Crear Reservacion
-        R = Reservacion(
-        Nombre=str(reg['Nombre'].value()),
-        Email=str(reg['Email'].value()),
-        Personas=str(reg['Personas'].value()),
-        Pasaporte=str(reg['Pasaporte'].value()),
-        HoraEntrada=str(reg['HoraEntrada'].value()),
-        HoraSalida=str(reg['HoraSalida'].value()),
-        Observaciones=str(reg['Observaciones']),
-        Aerolinea=airline[0],
-        Reservado_Por=request.user,
-        pdf='%s_%s.pdf'%(para,archivo),
-        )
-        R.save()
+            airline = Aerolinea.objects.filter(Nombre=str(reg['Aerolinea'].value()))
+            #Crear Reservacion
+            R = Reservacion(
+            Nombre=str(reg['Nombre'].value()),
+            Email=str(reg['Email'].value()),
+            Personas=str(reg['Personas'].value()),
+            Pasaporte=str(reg['Pasaporte'].value()),
+            HoraEntrada=str(reg['HoraEntrada'].value()),
+            HoraSalida=str(reg['HoraSalida'].value()),
+            Observaciones=str(reg['Observaciones']),
+            Aerolinea=airline[0],
+            Reservado_Por=request.user,
+            pdf='%s_%s.pdf'%(para,archivo),
+            Imagen_Pasaporte = reg.cleaned_data['Imagen_Pasaporte'],
+            Imagen_Pasaje = reg.cleaned_data['Imagen_Pasaje'],
+            )
+            R.save()
 
-        #Generacion del PDF
-            # Rendered
-        html_string = render_to_string('hostal/pdf.html', {'reservacion': R,'usuario':request.user})
-        html = HTML(string=html_string)
-        
-        salida = os.path.join(mediadir, "hostal","static","pdfs",'%s_%s.pdf'%(para,archivo))
-        result = html.write_pdf(salida)
-        
-        email = EmailMessage(
-            "Hotel Real - Confirmación de Reservación",
-            mensajeCliente,
-            'reservaenrealnicaragua@gmail.com',
-            [para,],
-        )
-        email.content_subtype='html'
-        email.attach_file(salida)
-        email.send(fail_silently=False)
+            #Generacion del PDF
+                # Rendered
+            html_string = render_to_string('hostal/pdf.html', {'reservacion': R,'usuario':request.user})
+            html = HTML(string=html_string)
+            
+            salida = os.path.join(mediadir, "hostal","static","pdfs",'%s_%s.pdf'%(para,archivo))
+            result = html.write_pdf(salida)
+            
+            email = EmailMessage(
+                "Hotel Real - Confirmación de Reservación",
+                mensajeCliente,
+                'reservaenrealnicaragua@gmail.com',
+                [para,],
+            )
+            email.content_subtype='html'
+            email.attach_file(salida)
+            email.send(fail_silently=False)
 
 
 
 
 
-        #Fin delpdf
+            #Fin delpdf
 
-        return render(request,'hostal/reservar.html',{'form':reg,'para':para})
+            return render(request,'hostal/reservar.html',{'form':reg,'para':para})
 
     return render(request,'hostal/reservar.html',{'form':reg})
     

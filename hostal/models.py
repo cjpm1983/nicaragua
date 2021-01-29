@@ -1,5 +1,6 @@
 from django.db import models
 from usuario.models import UserProfile 
+from django_resized import ResizedImageField
 
 # Create your models here.
 
@@ -34,6 +35,8 @@ class Reservacion(models.Model):
     #imagendestacada = models.ImageField(upload_to="imageshostales", null=True, blank=True)
     pdf = models.CharField(max_length=200, null=True)
     Observaciones = models.TextField(null=True)
+    Imagen_Pasaporte = ResizedImageField(upload_to="reservaciones/pasaportes", null=True, blank=True)
+    Imagen_Pasaje = ResizedImageField(upload_to="reservaciones/pasaje", null=True, blank=True)
     def __str__(self):
         return self.Nombre
 

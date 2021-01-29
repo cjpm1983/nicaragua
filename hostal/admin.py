@@ -18,7 +18,7 @@ class ReservacionAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Registrado a', {'fields': ('Nombre', 'Pasaporte','Email')}),
         ('Vuelo', {'fields': ('HoraEntrada','HoraSalida','Aerolinea')}),
-        ('Detalles', {'fields': ('Personas','Reservado_Por','Observaciones')}),
+        ('Detalles', {'fields': ('Personas','Imagen_Pasaporte','Imagen_Pasaje','Reservado_Por','Observaciones')}),
     )
     list_display = ('Nombre','HoraEntrada','HoraSalida','Aerolinea','Reservado_Por','Detalles')
     def Detalles(self, obj):
