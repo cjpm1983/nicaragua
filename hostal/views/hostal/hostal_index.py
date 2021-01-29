@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.mail import send_mail
 from hostal import forms
-from hostal.models import Reservacion
+from hostal.models import Reservacion, Aerolinea
 
 from django.template.loader import render_to_string
 from weasyprint import HTML
@@ -35,6 +35,7 @@ def HostalIndexView(request):
         #Nombre para el PDF
         archivo = "%s_%s"% (str(reg['Pasaporte'].value()),datetime.datetime.now())
 
+        airline = Aerolinea.objects.filter(Nombre=str(reg['Aerolinea'].value()))
         #Crear Reservacion
         R = Reservacion(
         Nombre=str(reg['Nombre'].value()),
@@ -43,7 +44,8 @@ def HostalIndexView(request):
         Pasaporte=str(reg['Pasaporte'].value()),
         HoraEntrada=str(reg['HoraEntrada'].value()),
         HoraSalida=str(reg['HoraSalida'].value()),
-        Aerolinea=str(reg['Aerolinea'].value()),
+        Observaciones=str(reg['Observaciones']),
+        Aerolinea=airline[0],
         Reservado_Por=request.user,
         pdf='%s_%s.pdf'%(para,archivo),
         )

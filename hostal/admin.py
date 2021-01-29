@@ -1,10 +1,13 @@
 from django.contrib import admin
-from .models import Hostal,Reservacion
+from .models import Hostal,Reservacion,Aerolinea
 from django.utils.html import format_html
 
 # Register your models here.
 
 class HostalAdmin(admin.ModelAdmin):
+    pass
+
+class AerolineaAdmin(admin.ModelAdmin):
     pass
 
 class ReservacionAdmin(admin.ModelAdmin):
@@ -15,7 +18,7 @@ class ReservacionAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Registrado a', {'fields': ('Nombre', 'Pasaporte','Email')}),
         ('Vuelo', {'fields': ('HoraEntrada','HoraSalida','Aerolinea')}),
-        ('Detalles', {'fields': ('Personas','Reservado_Por')}),
+        ('Detalles', {'fields': ('Personas','Reservado_Por','Observaciones')}),
     )
     list_display = ('Nombre','HoraEntrada','HoraSalida','Aerolinea','Reservado_Por','Detalles')
     def Detalles(self, obj):
@@ -26,3 +29,4 @@ class ReservacionAdmin(admin.ModelAdmin):
 
 #admin.site.register(Hostal,HostalAdmin)
 admin.site.register(Reservacion,ReservacionAdmin)
+admin.site.register(Aerolinea,AerolineaAdmin)
