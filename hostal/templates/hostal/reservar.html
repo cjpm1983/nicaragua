@@ -6,6 +6,11 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href={% static "assets/dtpicker/jquery.datetimepicker.min.css" %} integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+    <style>
+        .help{
+            color:darkgreen;
+        }
+    </style>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -34,7 +39,7 @@
                             {% endif %}
                             <form method="post" enctype='multipart/form-data'>
                                 {% csrf_token %}
-                            <div style="text-align:right;width:80%">
+                            <div style="text-align:left;/* width:80%; */padding: 25px;">
 
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" >{{ form.Nombre.label}}&nbsp;</label>

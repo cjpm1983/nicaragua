@@ -156,7 +156,7 @@ AUTH_USER_MODEL = "usuario.UserProfile"
 # python -m smtpd -n -c DebuggingServer localhost:25
 
 
- 
+"""  
 EMAIL_BACKEND= 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST= 'smtp.gmail.com'
@@ -166,8 +166,7 @@ EMAIL_HOST_PASSWORD = 'hjfnpjduggqtpoww'
 EMAIL_USE_TLS= True
 DEFAULT_FROM_EMAIL= 'admin@tomatattoocuba.com'
 EMAIL_TIMEOUT= 3000
- 
-'''
+  """
+
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'temp/app-messages/'
-'''

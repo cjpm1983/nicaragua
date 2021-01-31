@@ -5,12 +5,23 @@
 
 
 {% block stylesheets %}
+<style>
+.pagination{
+    margin:10px 0px;
+    background-color:#151b21;
+}
+.pagination > li{
+    margin-left: 5px;
+    color:white;
+}
+
+</style>
    
 {% endblock stylesheets %}
 
 {% block content %}
 
-    <div class="container align-center" style="top:70px;">
+    <div class="container align-center" >
         <div class="justify-content-md-center" >
         <h2 style=" color: #f9b530;
                     text-shadow: 0 3 black;
@@ -21,16 +32,46 @@
                     border-radius: 10px;
                     }">
         Sus reservaciones</h2>
+
+
+
+{% if reservaciones.has_other_pages %}
+  <ul class="pagination">
+    {% if reservaciones.has_previous %}
+      <li><a href="?page={{ reservaciones.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in reservaciones.paginator.page_range %}
+      {% if reservaciones.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if reservaciones.has_next %}
+      <li><a href="?page={{ reservaciones.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+
+
+
             <div style="max-width: 100%;
     overflow: scroll;">
 
 <table class="table table-striped table-dark">
     <thead>
-        <th style="min-width: 100px;">Fecha de llegada</th>
-        <th style="min-width: 100px;">Fecha de partida</th>
-        <th>a nombre de</th>
-        <th>pasaporte</th>
-        <th>No personas</th>
+        <th style="min-width: 300px;">A nombre de</th>
+        <th>Pasaporte</th>
+        <th>Personas</th>
+
+        <th style="min-width: 300px;">Fecha de llegada</th>
+        <th style="min-width: 300px;">Fecha de partida</th>
+
         
         <th>Foto Pasaporte</th>
         <th>Foto Pasaje</th>
@@ -41,11 +82,13 @@
     <tbody>
     {% for r in reservaciones %}
         <tr>
-            <td>{{r.HoraEntrada}}</td>
-            <td>{{r.HoraSalida}}</td>
             <td>{{r.Nombre}}</td>
             <td>{{r.Pasaporte}}</td>
             <td>{{r.Personas}}</td>
+
+            <td>{{r.HoraEntrada}}</td>
+            <td>{{r.HoraSalida}}</td>
+
             <td>
                 {% if r.Imagen_Pasaporte %}
                     <a target="_blank" href="{% get_media_prefix %}{{r.Imagen_Pasaporte}}">Descargar(Imagen)</a>
@@ -67,7 +110,30 @@
 
 </table>
 
-</div></div></div>
+</div>
+
+{% if reservaciones.has_other_pages %}
+  <ul class="pagination">
+    {% if reservaciones.has_previous %}
+      <li><a href="?page={{ reservaciones.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in reservaciones.paginator.page_range %}
+      {% if reservaciones.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if reservaciones.has_next %}
+      <li><a href="?page={{ reservaciones.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+</div></div>
 
 {% endblock content %}
 
