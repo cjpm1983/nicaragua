@@ -3,13 +3,12 @@
 {% block title %} Hostales Reserva {% endblock %} 
 
 
-
 {% block stylesheets %}
     <link rel="stylesheet" href={% static "assets/dtpicker/jquery.datetimepicker.min.css" %} integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
     <style>
         .help{
             color:darkgreen;
-        }
+        
     </style>
 {% endblock stylesheets %}
 
@@ -27,7 +26,7 @@
                                                                                             border-radius: 10px;
                                                                                             color: #403837;">
                     {% if para %}
-                        se ha enviadoun correo a {{para}} con informacion de la reservacion
+                        se ha enviado un correo a {{para}} con informacion de la reservacion
                     {% else %}  
                         
                             {% if form.subject.errors %}
