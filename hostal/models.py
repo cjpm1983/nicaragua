@@ -26,6 +26,9 @@ class Reservacion(models.Model):
     Nombre = models.CharField(max_length=200,null=False)
     Pasaporte = models.CharField(max_length=7,null=False)
     Email = models.EmailField()
+    Imagen_Pasaporte = ResizedImageField(upload_to="reservaciones/pasaportes", null=True, blank=True)
+    Imagen_Pasaje = ResizedImageField(upload_to="reservaciones/pasaje", null=True, blank=True)
+
     Personas = models.IntegerField(null=True)
     HoraEntrada = models.DateTimeField()
     HoraSalida = models.DateTimeField()
@@ -35,8 +38,22 @@ class Reservacion(models.Model):
     #imagendestacada = models.ImageField(upload_to="imageshostales", null=True, blank=True)
     pdf = models.CharField(max_length=200, null=True)
     Observaciones = models.TextField(null=True)
+    class Meta:
+        verbose_name = "Reservación"
+        verbose_name_plural = "Reservaciones"
+    def __str__(self):
+        return '%s_%s_%d-personas_%s'%(self.Nombre,self.Aerolinea,self.Personas,HoraEntrada)
+
+class Cliente(models.Model):
+    Nombre = models.CharField(max_length=200,null=False)
+    Pasaporte = models.CharField(max_length=7,null=False)
+    Email = models.EmailField()
     Imagen_Pasaporte = ResizedImageField(upload_to="reservaciones/pasaportes", null=True, blank=True)
     Imagen_Pasaje = ResizedImageField(upload_to="reservaciones/pasaje", null=True, blank=True)
+    Reservacion = models.ForeignKey(Reservacion, on_delete=models.CASCADE)
+    class Meta:
+        verbose_name = "Cliente"
+        verbose_name_plural = "Clientes"
     def __str__(self):
         return self.Nombre
 
