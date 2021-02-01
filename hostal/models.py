@@ -24,7 +24,7 @@ class Aerolinea(models.Model):
 
 class Reservacion(models.Model):
     Nombre = models.CharField(max_length=200,null=False)
-    Pasaporte = models.CharField(max_length=7,null=False)
+    Pasaporte = models.CharField(max_length=12,null=False)
     Email = models.EmailField()
     Personas = models.IntegerField(null=True)
     HoraEntrada = models.DateTimeField()
