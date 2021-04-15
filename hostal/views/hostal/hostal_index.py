@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.mail import send_mail
 from hostal import forms
-from hostal.models import Reservacion, Aerolinea
+from hostal.models import Reservacion, Aerolinea, Cliente
 
 from django.template.loader import render_to_string
 from weasyprint import HTML
@@ -37,23 +37,68 @@ def HostalIndexView(request):
             archivo = "%s_%s"% (str(reg['Pasaporte'].value()),datetime.datetime.now())
 
             airline = Aerolinea.objects.filter(Nombre=str(reg['Aerolinea'].value()))
-            #Crear Reservacion
+
+ 
+
+
+            #Crear Reservacion sin aNombre de
             R = Reservacion(
-            Nombre=str(reg['Nombre'].value()),
-            Email=str(reg['Email'].value()),
-            Personas=str(reg['Personas'].value()),
-            Pasaporte=str(reg['Pasaporte'].value()),
-            HoraEntrada=str(reg['HoraEntrada'].value()),
-            HoraSalida=str(reg['HoraSalida'].value()),
-            #Observaciones=str(reg['Observaciones'].text),
-            Observaciones = reg.cleaned_data['Observaciones'],
-            Aerolinea=airline[0],
-            Reservado_Por=request.user,
-            pdf='%s_%s.pdf'%(para,archivo),
-            Imagen_Pasaporte = reg.cleaned_data['Imagen_Pasaporte'],
-            Imagen_Pasaje = reg.cleaned_data['Imagen_Pasaje'],
+                # Nombre=str(reg['Nombre'].value()),
+                # Email=str(reg['Email'].value()),
+                Personas=str(reg['Personas'].value()),
+                # Pasaporte=str(reg['Pasaporte'].value()),
+
+                #aNombre=aNombre,
+
+                HoraEntrada=str(reg['HoraEntrada'].value()),
+                HoraSalida=str(reg['HoraSalida'].value()),
+                Observaciones=reg.cleaned_data['Observaciones'],
+                Aerolinea=airline[0],
+                Reservado_Por=request.user,
+                pdf='%s_%s.pdf'%(para,archivo),
+                # Imagen_Pasaporte = reg.cleaned_data['Imagen_Pasaporte'],
+                # Imagen_Pasaje = reg.cleaned_data['Imagen_Pasaje'],
             )
             R.save()
+            #Creamos aNombre de y lo agregamos
+            aNombre=Cliente(
+                Nombre=str(reg['Nombre'].value()),
+                Email=str(reg['Email'].value()),
+                Pasaporte=str(reg['Pasaporte'].value()),
+                Imagen_Pasaporte = reg.cleaned_data['Imagen_Pasaporte'],
+                Imagen_Pasaje = reg.cleaned_data['Imagen_Pasaje'],
+                Reservacion=R
+                )
+            aNombre.save()
+            #Agragdo aNombre de a Reservacion
+            R.aNombre=aNombre
+            R.save()
+
+            #Agregando los extras
+            if 'Nombrel[]' in request.POST:
+                print(request.FILES)
+
+                Nombrel=request.POST.getlist('Nombrel[]')
+                Pasaportel=request.POST.getlist('Pasaportel[]')
+                Imagen_Pasaportel = request.FILES.getlist('Imagen_Pasaportel[]')
+                Imagen_Pasajel = request.FILES.getlist('Imagen_Pasajel[]')
+
+                for i in range(0,len(Nombrel)):
+                    c = Cliente(Nombre=Nombrel[i],
+                                Reservacion=R,
+                                Pasaporte=Pasaportel[i],
+                                Imagen_Pasaporte=Imagen_Pasaportel[i],
+                                Imagen_Pasaje=Imagen_Pasajel[i], 
+                    )
+                    c.save()
+                    
+
+
+            
+            # tipo = request.POST['tipo']
+            #te = str(reg['Nombrel'][0].value()),
+
+            # print("Se salvo%s"%te)
 
             #Generacion del PDF
                 # Rendered

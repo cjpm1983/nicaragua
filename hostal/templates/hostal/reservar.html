@@ -61,8 +61,8 @@
                                     
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" >Costo de Resrevacion</label>
-                                            <b id="costo">El costo es de 550 USD</b>
+                                    <label class="form-control-label mbr-fonts-style display-7" >Costo Diario</label>
+                                            <b id="costo">El costo de reservación para una persona en una noche es 20 USD</b>
                                     
                                 </div>
                                 <div class="form-group">
@@ -74,7 +74,12 @@
                                     <label class="form-control-label mbr-fonts-style display-7" >{{ form.HoraSalida.label}}&nbsp;</label>
                                             {{ form.HoraSalida}}
                                     
-                                </div>                    
+                                </div>        
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" >Costo Total</label>
+                                            <b id="costoTotal">Seleccione fecha y ora de entrada y salida</b>
+                                    
+                                </div>            
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" >{{ form.Aerolinea.label}}&nbsp;</label>
                                             {{ form.Aerolinea}}
@@ -100,52 +105,9 @@
 
                                 </div>
 
-                                <!--///////////REPEATER///////////////-->
-                                    <!--div id="repeater">
-                                        
-                                        <div class="repeater-heading">
-                                            <button id="add" class="btn btn-primary repeater-add-btn">
-                                                Add
-                                            </button>
-                                        </div>
-                                        
-                                        <div class="items" data-group="test">
-                                        
-                                            
-                                                    <div class="items" data-group="test">
-                                        
-                                                        <div class="item-content">
-                                                            <div class="form-group">
-                                                            <label for="inputEmail" class="col-lg-2 control-label">Name</label>
-                                                            <div class="col-lg-10">
-                                                                <input type="text" class="form-control" id="inputName" placeholder="Name" data-name="name">
-                                                            </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-                                                            <div class="col-lg-10">
-                                                            <input type="text" class="form-control" id="inputEmail" placeholder="Email" data-skip-name="true" data-name="email">
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                        
-                                                        <div class="pull-right repeater-remove-btn">
-                                                            <button id="remove-btn" class="btn btn-danger" onclick="$(this).parents('.items').remove()">
-                                                                Remove
-                                                            </button>
-                                                        </div>
-                                                    </div>
 
 
-
-                                        </div>
-                                    </div-->
-                                <!--//////////////////////////-->
-
-
-
-
-                                <span class="input-group-btn">
+                                <span class="input-group-btn submit">
                                     <button href="" type="submit" class="btn btn-primary btn-form display-4">Reservar</button>
                                 </span>
                                 
@@ -161,6 +123,35 @@
         </div>
     </div>
 
+
+
+    <!-- Esta es la plantilla de los formularios adicionales -->
+<div class="form-group fieldGroupCopy" style="display: none;">
+
+    <div class="form-group">
+        <label class="form-control-label mbr-fonts-style display-7">Nombre&nbsp;</label>
+        <input type="text" name="Nombrel[]" maxlength="200" required="Este campo es requerido">
+    </div>
+
+    <div class="form-group">
+        <label class="form-control-label mbr-fonts-style display-7">No. Pasaporte&nbsp;</label>
+        <input type="text" name="Pasaportel[]" maxlength="12" minlength="7" required=""> 
+    </div>
+
+    <div class="form-group">
+        <label class="form-control-label mbr-fonts-style display-7">Imagen pasaporte&nbsp;</label>
+        <input type="file" name="Imagen_Pasaportel[]" accept="image/*" required="Debe adjuntar una foto del pasaporte">
+        <div class="help">Foto de la primera hoja del pasaporte</div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-control-label mbr-fonts-style display-7">Imagen pasaje&nbsp;</label>
+        <input type="file" name="Imagen_Pasajel[]" accept="image/*" required="Debe adjuntar una foto del pasaje" >
+        <div class="help">Foto del pasaje</div>
+    </div>
+
+</div>
+
 {% endblock content %}
 
 
@@ -169,18 +160,9 @@
         <script src={% static "https://code.jquery.com/jquery-3.3.1.slim.min.js" %} integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src={% static "assets/dtpicker/jquery.datetimepicker.full.min.js" %} integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
         
-        <!--script src="{% static 'assets/form-fields-repeater/repeater.js' %}"></script-->  
-        
-        
         <script>
-        /*
-            $("#repeater").createRepeater({
-                showFirstItemToDefault: true,
-            });
-            document.getElementById("add").addEventListener("submit", function(event){
-             event.preventDefault()
-            });
-*/
+        //Precio de 1 persona
+        let precio = 20
             $(function () {
                 //e.preventDefault();
                 $("#id_HoraEntrada").attr("autocomplete", "off"); 
@@ -198,19 +180,55 @@
             });
 
             $('#id_Personas').on('change',function(){
-                switch (this.value) {
-                    case '1':{
-                        $('#costo').html("El costo es de 550 USD")
-                    }
-                    break
-                    case '2':{
-                        $('#costo').html("El costo es de 1000 USD")
-                    }
-                    break
+
+                p=parseInt(this.value)
+                //Remover subformularios siempre
+                $(".fieldGroup").remove();
+
+                
+
+                if (p>1){
+                        for(i=1;i<p;i++){
+                            var fieldHTML = '<div class="form-group fieldGroup"><h3>Cliente Adicional No. '+i+'</h3>'+$(".fieldGroupCopy").html()+'</div>';
+                            $('body').find('.submit').before(fieldHTML);
+                        }
                 }
+
+                $('#costo').html("El costo de una noche para "+p+" personas es: "+p*precio+" USD")
                 
+            })
+            
+
+            var date_diff_indays = function(date1, date2) {
+                dt1 = new Date(date1);
+                dt2 = new Date(date2);
+                return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
+            }
+            var calcularDias = function(){
+                string1 = document.getElementById("id_HoraEntrada").value
+                string2 = document.getElementById("id_HoraSalida").value
+                let dif = date_diff_indays(string1 , string2)
+
+                p = parseInt(document.getElementById("id_Personas").value)
                 
-                })
+                if (dif<0 || Number.isNaN(dif)){
+                    
+                    $('#costoTotal').html("Entre un intervalo de fechas correcto")
+                }else{
+                    $('#costoTotal').html("El costo total de "+dif+" noches para "+p+" personas es: "+p*precio*dif+" USD")
+                    
+
+                }
+            
+            } 
+
+                        //los dias para elprecio total
+            $("#id_HoraSalida").on('change', calcularDias)
+            $("#id_HoraEntrada").on('change', calcularDias)
+            $("#id_Personas").on('change', calcularDias)
+
+
+            
             
         </script>
 

@@ -1,0 +1,7 @@
+<h1>Reservaciones</h1>
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <h2>Clientes</h2>
+    {{ children.as_p }}
+    <input type="submit" value="Guardar">
+</form>
