@@ -12,6 +12,9 @@ class Hostal(models.Model):
     descripcion = models.TextField()
     direccion = models.TextField()
     imagendestacada = models.ImageField(upload_to="imageshostales", null=False, blank=False)
+    class Meta:
+        verbose_name = "Hotel"
+        verbose_name_plural = "Hoteles"
 
     def __str__(self):
         return self.nombre
@@ -23,12 +26,13 @@ class Aerolinea(models.Model):
         return self.Nombre
 
 class Reservacion(models.Model):
-    Nombre = models.CharField(max_length=200,null=False)
-    Pasaporte = models.CharField(max_length=7,null=False)
-    Email = models.EmailField()
-    Imagen_Pasaporte = ResizedImageField(upload_to="reservaciones/pasaportes", null=True, blank=True)
-    Imagen_Pasaje = ResizedImageField(upload_to="reservaciones/pasaje", null=True, blank=True)
+    # Nombre = models.CharField(max_length=200,null=False)
+    # Pasaporte = models.CharField(max_length=7,null=False)
+    # Email = models.EmailField()
+    # Imagen_Pasaporte = ResizedImageField(upload_to="reservaciones/pasaportes", null=True, blank=True)
+    # Imagen_Pasaje = ResizedImageField(upload_to="reservaciones/pasaje", null=True, blank=True)
 
+    aNombre=models.ForeignKey("hostal.Cliente", verbose_name=("A nombre de"), on_delete=models.CASCADE,blank=True,null=True)
     Personas = models.IntegerField(null=True)
     HoraEntrada = models.DateTimeField()
     HoraSalida = models.DateTimeField()
@@ -42,7 +46,7 @@ class Reservacion(models.Model):
         verbose_name = "Reservación"
         verbose_name_plural = "Reservaciones"
     def __str__(self):
-        return '%s_%s_%d-personas_%s'%(self.Nombre,self.Aerolinea,self.Personas,HoraEntrada)
+        return '%s_%s_%s-personas_%s'%(self.aNombre,self.Aerolinea,self.Personas,self.HoraEntrada)
 
 class Cliente(models.Model):
     Nombre = models.CharField(max_length=200,null=False)
@@ -50,7 +54,7 @@ class Cliente(models.Model):
     Email = models.EmailField()
     Imagen_Pasaporte = ResizedImageField(upload_to="reservaciones/pasaportes", null=True, blank=True)
     Imagen_Pasaje = ResizedImageField(upload_to="reservaciones/pasaje", null=True, blank=True)
-    Reservacion = models.ForeignKey(Reservacion, on_delete=models.CASCADE)
+    Reservacion = models.ForeignKey(Reservacion, on_delete=models.CASCADE,null=True, blank=True)
     class Meta:
         verbose_name = "Cliente"
         verbose_name_plural = "Clientes"
