@@ -2,6 +2,8 @@ from django.contrib import admin
 from .models import Hostal,Reservacion,Aerolinea,Cliente
 from django.utils.html import format_html
 
+from django.contrib.admin.models import LogEntry
+
 # Register your models here.
 
 class HostalAdmin(admin.ModelAdmin):
@@ -21,6 +23,14 @@ class ClienteAdmin(admin.ModelAdmin):
     def Reservado_en(self, obj):
         link = '/admin/hostal/reservacion/%s/change/' % obj.Reservacion.id
         return format_html('<a href="{}">{}</a>', link, obj.Reservacion)
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(Reservacion__Reservado_Por=request.user)
+
+    
     
 
 class ReservacionAdmin(admin.ModelAdmin):
@@ -44,21 +54,52 @@ class ReservacionAdmin(admin.ModelAdmin):
     def Detalles(self, obj):
         link = '/media/hostal/static/pdfs/%s' % obj.pdf  # 'admin:tesoreria_aportesobreros_change')
         return format_html('<a href="%s">%s</a>'%(link,"Descargar(PDF)") )
-
+    '''
     def has_change_permission(self, request, obj=None):
         if obj is not None:
             if request.user.is_superuser:
                 return True
             else: 
-                if obj.user != request.user:
+                if obj.Reservado_Por != request.user:
                     return False
                 else:
                     return True
+    '''
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(Reservado_Por=request.user)
 
+    
     list_filter = ['Reservado_Por','Aerolinea','Personas']
     search_fields = ['aNombre']
 
 #admin.site.register(Hostal,HostalAdmin)
+
+@admin.register(LogEntry)
+class LogEntryAdmin(admin.ModelAdmin):
+    date_hierarchy = 'action_time'
+
+    list_filter = [
+        'user',
+        'content_type',
+        'action_flag'
+    ]
+
+    search_fields = [
+        'object_repr',
+        'change_message'
+    ]
+
+    list_display = [
+        'action_time',
+        'user',
+        'content_type',
+        'action_flag'
+    ]
+
+
 admin.site.register(Reservacion,ReservacionAdmin)
 admin.site.register(Aerolinea,AerolineaAdmin)
 admin.site.register(Cliente,ClienteAdmin)
