@@ -15,6 +15,7 @@ class AerolineaAdmin(admin.ModelAdmin):
 class ClienteAdmin(admin.ModelAdmin):
     list_display = ('Nombre','Reservado_en','Pasaporte','Email','Imagen_Pasaporte','Imagen_Pasaje')
     #list_filter = ['Reservacion']
+    list_per_page = 15 
     def get_readonly_fields(self, request, obj=None):
         if obj:
             return self.readonly_fields + ('Reservacion',)
@@ -45,7 +46,7 @@ class ReservacionAdmin(admin.ModelAdmin):
     )
 
     list_display = ('aNombre','Clientes','HoraEntrada','HoraSalida','Aerolinea','Reservado_Por','Detalles')
-
+    list_per_page = 15 
     def Clientes(self, obj):
         link = '/admin/hostal/cliente/?Reservacion__id__exact=%d' % obj.id  # 'admin:tesoreria_aportesobreros_change')
         return format_html('<a href="{}">{}</a>', link,
@@ -98,6 +99,7 @@ class LogEntryAdmin(admin.ModelAdmin):
         'content_type',
         'action_flag'
     ]
+    list_per_page = 30
 
 
 admin.site.register(Reservacion,ReservacionAdmin)
