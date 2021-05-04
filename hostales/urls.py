@@ -24,8 +24,8 @@ urlpatterns = [
 
     # The home page
     #path("", include("home.urls")),  # add this
-    path("", include("authentication.urls")),  # add this
     path('', include('hostal.urls')),
+    path("", include("authentication.urls")),  # add this
     #path('', include('reservacion.urls')),
 
     path('admin/', admin.site.urls),
