@@ -146,7 +146,8 @@ STATIC_URL = '/static/'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATIC_ROOT = '/home/cpalacios/Documents/hostales/static/'
+#STATIC_ROOT = '/home/cpalacios/Documents/hostales/static/'
+STATIC_ROOT = '/home/carlos/hostales/static'
 
 
 AUTH_USER_MODEL = "usuario.UserProfile"
