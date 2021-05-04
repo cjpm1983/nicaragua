@@ -34,14 +34,16 @@ class Reservacion(models.Model):
 
     aNombre=models.ForeignKey("hostal.Cliente", verbose_name=("A nombre de"), on_delete=models.CASCADE,blank=True,null=True)
     Personas = models.IntegerField(null=True)
-    HoraEntrada = models.DateTimeField()
-    HoraSalida = models.DateTimeField()
+    HoraEntrada = models.DateTimeField(verbose_name=("Fecha y hora de entrada"))
+    HoraSalida = models.DateTimeField(verbose_name=("Fecha y hora de entrada"))
     #Aerolinea = models.CharField(max_length=200,null=True)
     Aerolinea = models.ForeignKey(Aerolinea,on_delete=models.DO_NOTHING,null=True)
     Reservado_Por = models.ForeignKey(UserProfile,on_delete=models.CASCADE,null=True)
     #imagendestacada = models.ImageField(upload_to="imageshostales", null=True, blank=True)
     pdf = models.CharField(max_length=200, null=True)
     Observaciones = models.TextField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True,verbose_name=("Fecha de creada"))
+    updated_at = models.DateTimeField(auto_now=True,verbose_name=("Fecha de actualizada"))
     class Meta:
         verbose_name = "Reservación"
         verbose_name_plural = "Reservaciones"
@@ -55,6 +57,8 @@ class Cliente(models.Model):
     Imagen_Pasaporte = ResizedImageField(upload_to="reservaciones/pasaportes", null=True, blank=True)
     Imagen_Pasaje = ResizedImageField(upload_to="reservaciones/pasaje", null=True, blank=True)
     Reservacion = models.ForeignKey(Reservacion, on_delete=models.CASCADE,null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True,verbose_name=("Fecha de creado"))
+    updated_at = models.DateTimeField(auto_now=True,verbose_name=("Fecha de actualizado"))
     class Meta:
         verbose_name = "Cliente"
         verbose_name_plural = "Clientes"

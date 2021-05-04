@@ -4,6 +4,8 @@ from django.utils.html import format_html
 
 from django.contrib.admin.models import LogEntry
 
+from daterangefilter.filters import PastDateRangeFilter
+
 # Register your models here.
 
 class HostalAdmin(admin.ModelAdmin):
@@ -14,7 +16,7 @@ class AerolineaAdmin(admin.ModelAdmin):
 
 class ClienteAdmin(admin.ModelAdmin):
     list_display = ('Nombre','Reservado_en','Pasaporte','Email','Imagen_Pasaporte','Imagen_Pasaje')
-    #list_filter = ['Reservacion']
+    list_filter = [('created_at', PastDateRangeFilter),]
     list_per_page = 15 
     def get_readonly_fields(self, request, obj=None):
         if obj:
@@ -73,7 +75,7 @@ class ReservacionAdmin(admin.ModelAdmin):
         return qs.filter(Reservado_Por=request.user)
 
     
-    list_filter = ['Reservado_Por','Aerolinea','Personas']
+    list_filter = [('HoraEntrada', PastDateRangeFilter),'Reservado_Por','Aerolinea','Personas']
     search_fields = ['aNombre']
 
 #admin.site.register(Hostal,HostalAdmin)

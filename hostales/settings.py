@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     #'reservacion',
     'sslserver',
     'hostal',
+    'daterangefilter',
 ]
 
 #django_resize configuracion
