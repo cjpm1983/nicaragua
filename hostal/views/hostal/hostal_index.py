@@ -102,7 +102,7 @@ def HostalIndexView(request):
 
             #Generacion del PDF
                 # Rendered
-            html_string = render_to_string('hostal/pdf.html', {'reservacion': R,'usuario':request.user})
+            html_string = render_to_string('hostal/pdf.html', {'reservacion': R,'aNombre':aNombre,'usuario':request.user})
             html = HTML(string=html_string)
             
             salida = os.path.join(mediadir, "hostal","static","pdfs",'%s_%s.pdf'%(para,archivo))

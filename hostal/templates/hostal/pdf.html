@@ -7,28 +7,32 @@
    </style>
  </head>
  <body>
- <div style="width:100%;display:flex;justify-content:center;">
+ <div style="width:100%;display:flex;flex-direction:column;justify-content:center;align-content:center;">
 
    
    <div>
       <h1>DETALLES DE LA RESERVACION</h1>
-   <div style="width:100%;text-align:center;">
-    <img src="http://localhost:8000/static/assets/images/logo2.jpg" alt="nicaraguacuba" style="height: 3.8rem;border-radius: 10px; opacity: .7;">
+
+   <div style="width:100%;text-align:center;background-color:green;">
+      <img src="http://localhost:8000/static/assets/images/logo2.jpg" style="max-height: 3.8rem; 10px; opacity: .7;">
+      <br>
+      <img src="http://5.152.222.124/static/assets/images/logo2.jpg" style="max-height: 3.8rem; opacity: .7;">
+   
    </div> 
    <br>
    <table class="table table-striped" >
      <tbody>
          <tr>
            <td><b> A nombre de</b> </td>
-           <td> {{reservacion.Nombre}} </td>
+           <td> {{aNombre.Nombre}} </td>
          </tr>  
          <tr>
            <td><b> Pasaporte</b> </td>
-           <td> {{reservacion.Pasaporte}} </td>
+           <td> {{aNombre.Pasaporte}} </td>
          </tr>  
           <tr>
            <td><b> Email</b> </td>
-           <td> {{reservacion.Email}} </td>
+           <td> {{aNombre.Email}} </td>
          </tr>  
          <tr>
            <td><b> Personas</b> </td>
@@ -61,7 +65,9 @@
      </tbody>
 
    </table>
+
    </div>
+
    </div>
  </body>
 </html>
