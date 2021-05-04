@@ -52,7 +52,7 @@ class Reservacion(models.Model):
 
 class Cliente(models.Model):
     Nombre = models.CharField(max_length=200,null=False)
-    Pasaporte = models.CharField(max_length=7,null=False)
+    Pasaporte = models.CharField(max_length=20,null=False)
     Email = models.EmailField()
     Imagen_Pasaporte = ResizedImageField(upload_to="reservaciones/pasaportes", null=True, blank=True)
     Imagen_Pasaje = ResizedImageField(upload_to="reservaciones/pasaje", null=True, blank=True)
