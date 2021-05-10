@@ -1,0 +1,311 @@
+<html>
+{% load static %}
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>Reserva Oficial</title>
+<style>
+body{
+    
+}
+.content{
+    font-size: 10px;
+    width:100%;
+}
+.fila0{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+.fila1{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+}
+.fila2{
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+.fila3{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:10px;
+}
+ul{
+    min-width:200px;
+}
+.contacto{
+    max-width: 200px;
+}
+.imagenes{
+}
+.imagenes > img{
+    width:200px;
+}
+
+.codigo{
+    max-width:200px;
+    /*margin: 0px 100px 0px 50px;*/
+    /*padding-left:10px;*/
+}
+.header{
+    width:100%;
+    text-align:center;
+    background-color: #caf7d2;
+    padding:5px;
+}
+.valor{
+    /*background-color: #446d02;*/
+    color: #000;
+    padding: 0px 10px;
+    font-weight: 900;
+    font-size: 10px;
+}
+
+.adress{
+    /*padding: 0px 10px;*/
+}
+.barra{
+    width: 100%;
+    text-align: center;
+    background-color: #aabfae;
+    min-height: 10px;
+    font-size: larger;
+    font-weight: 600;
+}
+.infobox{
+    display: flex;
+    flex-direction: column;
+    min-width:300px;
+    max-width: 300px;
+}
+.infoimg{
+    display: flex;
+    justify-content: center;
+}
+.fila4{
+    display: flex;
+    /*
+    align-items: flex-start;
+    align-content: flex-start;
+    */
+}
+.columna{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.columna > span{
+    margin: 3px 0px;
+}
+.tfactura{
+    width:100%;
+}
+.tfactura td{
+    text-align: right;
+}
+.tcabeceras td{
+    font-weight:bold;
+    text-align:center;
+}
+
+</style>
+<body>
+
+<div class="content">
+    <div class="header">
+        
+        <h1>RESERVACIÓN OFICIAL</h1>
+
+    </div>
+        
+   
+    <div class="fila0">
+
+        <div class="contacto">
+            
+            <span class="adress">
+            
+                <p><b>Información de contacto</b><br>
+		<b>Tel:</b> <a href="tel:50522774548">(505) 2277-4548</a>
+		<b>RUC:</b>881-002890000U<br><b>Dirección:</b> Managua. Nicaragua. » Km 5 Carretera A Masaya, frente a TGI Friday's.</p>
+            </span>
+        </div>
+
+
+        <div class="imagenes">
+        
+            <img src="http://localhost:8000/static/assets/images/logo.png" class="toplogo">
+            <!--br>
+            <img src="http://localhost:8000/static/assets/images/hotel.png" class="hotel"-->
+
+        </div>
+        
+        <div class="codigo">
+        
+            <p>
+                <b>Confirmación de reserva</b>
+                <br>
+                <span>Código:</span><span class="valor" >R-{{r.id}}</span>
+                <br>
+                <span>Agente:</span><span class="valor" >{{agente}}</span>
+                <br>
+                <span>Habitación para:</span><span class="valor" >
+                {% if extras %}
+                {{extras|length}}
+                {% else %}
+                1
+                {% endif %} 
+                </span><span>&nbsp;huéspedes</span>
+                <br>
+                <span>Cliente:</span><span class="valor" >{{aNombre}}</span>
+
+            </p>
+        </div>
+        
+    </div>
+
+    <div class="barra"></div>
+    
+    <table class="tfactura">
+        <tr  class="tcabeceras">
+            <td>Cliente</td><td>Entrada</td><td>Salida</td><td>Aerolínea</td><td>Noches</td><td>Precio</td>
+        </tr>
+        <tr>
+            <td>{{aNombre}}</td><td>{{fe|date:'D d M Y'}}</td><td>{{fs|date:'D d M Y'}}</td><td>{{r.aerolinea}}</td><td>{{dias}}</td><td>20</td>
+        </tr>
+        {% if extras %}
+            {% for e in extras  %}
+                <tr>
+                    <td>{{e.Nombre}}</td><td>{{fe|date:'D d M Y'}}</td><td>{{fs|date:'D d M Y'}}</td><td>{{r.aerolinea}}</td><td>{{dias}}</td><td>20</td>
+                </tr>
+            
+            {% endfor %}
+        {% endif %}
+
+
+        <tr>
+            <td colspan=5><b>Retorno al Aeropuerto</b></td><td><b>10</b></td>
+        </tr>
+        <tr>
+            <td colspan=5><b>Total a pagar</b></td><td><b>
+            {{t}}
+            </b></td>
+        </tr>
+        
+        
+    </table>
+    
+
+
+    <div class="barra">PAGO POR ADELANTADO</div>
+    <div>
+        <p>
+            Cada cliente paga en Cuba <b>$10.00 USD NO REEMBOLSABLES <span style="color:crimson;">SIN COBRO DE COMISIÓN EXTRA</span></b> • <span style="color:crimson;">Si cancela,
+el pago no es reembolsable</span> • Se permiten cambios de fechas, según la disponibilidad.
+        </p>
+    </div>
+
+    <div class="barra">OBSERVACIONES</div>
+    <div>
+        <p>
+            <b>Solo en hospedajes para cubanos:</b><br>
+            <ul>
+                <li>
+                El costo de nuestra tarifa es de <b>$20:00 USD</b> x huésped por noche. Incluye: Hospedaje, desayuno y cena. SIEMPRE TRATAREMOS DE
+            COMPLACER EL DESEO DEL CLIENTE EN CUANTO AL HOSPEDAJE. <b>NUESTRAS INSTALACIONES SE RESERVAN SEGÚN DISPONIBLIDAD</b>.
+                </li>
+                <li>
+                Los niños menores de 6 años no cotizan. <b>GRATIS</b>
+                </li>
+                <li>
+                Transportación de recogida a su arribo al aeropuerto de Managua es <b>GRATIS</b>. POR UN COSTO ADICIONAL SE PODRÁN CONTRATAR
+            EXCURSIONES
+                </li>
+                <li>
+                Transportación y asistencia de guiás en los viajes de compras al mercado es <b>GRATIS</b>. DOMINGO DÍA DE DESCANSO DE LOS CHÓFERES    
+                </li>
+                <li>
+                <span style="color:crimson;"><b>Transportación de regreso al aeropuerto, que incluye todos sus equipajes por </span>un costo extra de $10.00 USD</b>.    
+                </li>
+                <li>
+                Al hacer la reservación cada huésped debe depositar por adelantado un importe de $10.00 USD que se le deduce del total de las noches
+            en nuestras instalaciones. (<span style="color:crimson;"><b>En caso de NO Checking en el Hotel, se pierde el importe pagado.</b></span> )
+                </li>
+            </ul>
+
+            <b>Régimen de comidas</b>: Empieza el día con un desayuno fuerte por persona. Y en la tarde-noche una cena fuerte por persona. Además de café
+            cubano 24h/7d.    
+            <br>    
+            • Ducha • TV • Aire acondicionado • Artículos de aseo gratis • Aseo • Baño privado • Canales por cable • TV de pantalla plana • Toallas • Ropa
+de cama • Papel higiénico • Papeleras • Champú • Enchufe.
+        </p>
+    </div>
+
+    <div class="barra"></div>
+    <div><p></p></div>
+    <div class="fila3">
+        <div class="infobox">
+            <div class="infoimg">
+                <img src="http://localhost:8000/static/assets/images/condiciones.jpg">
+            </div>
+            <div class="infoimg">
+                <b>Condiciones del hotel</b>
+            </div>
+            <div class="fila3">
+                <ul>
+                    <li>WiFi y TV por cable</li>
+                    <li>Seguridad 24 horas</li>
+                    <li>Servicio de piscina</li>
+                    <li>Servicio de gimnasio</li>
+                </ul>
+                <ul>
+                    <li>Servicio de bar</li>
+                    <li>Bioseguridad</li>
+                    <li>Kit sanitario personalizado</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="infobox">
+            <div class="infoimg">
+                <img src="http://localhost:8000/static/assets/images/ruedad.jpg">
+            </div>
+            <div>
+             <p>
+                Si tienes preguntas sobre el establecimiento, puedes ponerte en
+contacto con Hotel Real en Managua en el <a href="tel:50522774548">+505 2277 4548</a>
+             </p>
+             <p>
+             También puedes consultar la página web: 
+             <a href="https://hospedajesparacubanos.com/2019/11/21/hotel-real-managua-nicaragua/">
+https://hospedajesparacubanos.com/2019/11/21/hotel-real-managua-nicaragua/</a>
+             </p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="barra"></div>
+    <div>
+        <p>
+        Gracias por elegir <b>HOTEL REAL</b>. Atentamente: Gerencia y equipo de trabajo de <b>HOTEL REAL</b>.
+        </p>
+        <span class="fila2">
+            <span><img src="http://localhost:8000/static/assets/images/corona.jpg"></span><span><img src="http://localhost:8000/static/assets/images/otrohotel.jpg"></span>
+        </span>
+    </div>
+    
+
+
+    
+   
+</div>
+</body>
+<html>

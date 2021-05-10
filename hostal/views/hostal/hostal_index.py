@@ -4,7 +4,7 @@ from hostal import forms
 from hostal.models import Reservacion, Aerolinea, Cliente
 
 from django.template.loader import render_to_string
-from weasyprint import HTML
+from weasyprint import HTML, CSS
 import tempfile
 from hostales.settings import MEDIA_ROOT as mediadir
 import os
@@ -74,38 +74,48 @@ def HostalIndexView(request):
             R.aNombre=aNombre
             R.save()
 
+            #dias para el pdf
+            fe = datetime.datetime.strptime(R.HoraEntrada,"%Y-%m-%d %H:%M") 
+            fs = datetime.datetime.strptime(R.HoraSalida,"%Y-%m-%d %H:%M") 
+            dias = (fs - fe).days
+            #- datetime(reg['HoraSalida'].value())  )
+
             #Agregando los extras
+            extras = []
             if 'Nombrel[]' in request.POST:
                 print(request.FILES)
 
-                Nombrel=request.POST.getlist('Nombrel[]')
-                Pasaportel=request.POST.getlist('Pasaportel[]')
+                Nombrel = request.POST.getlist('Nombrel[]')
+                Pasaportel = request.POST.getlist('Pasaportel[]')
                 Imagen_Pasaportel = request.FILES.getlist('Imagen_Pasaportel[]')
                 Imagen_Pasajel = request.FILES.getlist('Imagen_Pasajel[]')
 
-                for i in range(0,len(Nombrel)):
+                for i in range(0, len(Nombrel)):
                     c = Cliente(Nombre=Nombrel[i],
                                 Reservacion=R,
                                 Pasaporte=Pasaportel[i],
                                 Imagen_Pasaporte=Imagen_Pasaportel[i],
-                                Imagen_Pasaje=Imagen_Pasajel[i], 
-                    )
+                                Imagen_Pasaje=Imagen_Pasajel[i] 
+                                )
                     c.save()
-                    
+                    # los demas clientes para el pdf
+                    extras.append(c)
+            
+            pagototal = dias*20*(len(extras) + 1) + 10                   
 
 
             
             # tipo = request.POST['tipo']
-            #te = str(reg['Nombrel'][0].value()),
+            # te = str(reg['Nombrel'][0].value()),
 
             # print("Se salvo%s"%te)
 
-            #Generacion del PDF
+            # Generacion del PDF
                 # Rendered
-            html_string = render_to_string('hostal/pdf.html', {'reservacion': R,'aNombre':aNombre,'usuario':request.user})
+            html_string = render_to_string('hostal/reserva.html', {'t':pagototal, 'fe':fe, 'fs':fs, 'r': R, 'dias': dias, 'aNombre': aNombre, 'agente': request.user, 'extras': extras})
             html = HTML(string=html_string)
             
-            salida = os.path.join(mediadir, "hostal","static","pdfs",'%s_%s.pdf'%(para,archivo))
+            salida = os.path.join(mediadir, "hostal", "static", "pdfs", '%s_%s.pdf' % (para, archivo))
             result = html.write_pdf(salida)
             
             email = EmailMessage(

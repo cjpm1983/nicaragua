@@ -157,7 +157,7 @@ AUTH_USER_MODEL = "usuario.UserProfile"
 #Para iniciar un servidorlocal depruebas
 # python -m smtpd -n -c DebuggingServer localhost:25
 
-
+'''
 
 EMAIL_BACKEND= 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -172,4 +172,3 @@ EMAIL_TIMEOUT= 3000
 '''
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'temp/app-messages/'
-'''
