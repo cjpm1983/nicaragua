@@ -122,7 +122,7 @@ def HostalIndexView(request):
                 "Hotel Real - Confirmación de Reservación",
                 mensajeCliente,
                 'reservaenrealnicaragua@gmail.com',
-                [para,],
+                [para,request.user.email],
             )
             email.content_subtype='html'
             email.attach_file(salida)
