@@ -176,12 +176,12 @@ ul{
             <td>Cliente</td><td>Entrada</td><td>Salida</td><td>Aerolínea</td><td>Noches</td><td>Precio</td>
         </tr>
         <tr>
-            <td>{{aNombre}}</td><td>{{fe|date:'D d M Y'}}</td><td>{{fs|date:'D d M Y'}}</td><td>{{r.aerolinea}}</td><td>{{dias}}</td><td>20</td>
+            <td>{{aNombre}}</td><td>{{fe|date:'D d M Y'}}</td><td>{{fs|date:'D d M Y'}}</td><td>{{r.Aerolinea}}</td><td>{{dias}}</td><td>20</td>
         </tr>
         {% if extras %}
             {% for e in extras  %}
                 <tr>
-                    <td>{{e.Nombre}}</td><td>{{fe|date:'D d M Y'}}</td><td>{{fs|date:'D d M Y'}}</td><td>{{r.aerolinea}}</td><td>{{dias}}</td><td>20</td>
+                    <td>{{e.Nombre}}</td><td>{{fe|date:'D d M Y'}}</td><td>{{fs|date:'D d M Y'}}</td><td>{{r.Aerolinea}}</td><td>{{dias}}</td><td>20</td>
                 </tr>
             
             {% endfor %}

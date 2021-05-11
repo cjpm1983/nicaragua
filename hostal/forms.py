@@ -15,7 +15,7 @@ for a in Aerolinea.objects.all():
 
 class Reservacion(forms.Form):
     Nombre = forms.CharField(required=True, max_length=200,help_text="Entre su nombre y apellidos tal y como aparecen en su pasaporte", error_messages={'required': 'Por favor,entre nombre y apellidos.'})
-    Pasaporte = forms.CharField(max_length=20,min_length=4,required=True,error_messages={'required':"Entre un valor validode 7 digitos de su pasaporte cubano"})
+    Pasaporte = forms.CharField(max_length=20,min_length=4,required=True,error_messages={'required':"Entre un valor valido para su pasaporte"})
     Email = forms.EmailField(label = "Su correo electrónico")
     Personas = forms.ChoiceField(label="Habitación para",choices=[(1,"Una persona"),(2,"Dos personas"),(3,"Tres personas"),(4,"Cuatro personas"),(5,"Cinco personas"),(6,"Seis personas"),(7,"Siete personas"),(8,"Ocho personas"),(9,"Nueve personas"),(10,"Diez personas")] )
     HoraEntrada = forms.DateTimeField(label="Día y hora de entrada",input_formats=['%d/%m/%Y %H:%M'])
